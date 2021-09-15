@@ -1,0 +1,29 @@
+$border_color: #dddddd;
+$header_background: #fafafa;
+
+.leases {
+  margin: 12px;
+
+  table {
+    border-collapse: collapse;
+    border: 1px solid $border_color;
+  }
+
+  td,
+  th {
+    border: 1px solid $border_color;
+    padding: 8px 24px;
+  }
+
+  th {
+    background: $header_background;
+  }
+
+  td {
+    font-size: 16px;
+  }
+
+  .contact-item {
+    display: block;
+  }
+}

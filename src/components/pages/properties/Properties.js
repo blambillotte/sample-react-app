@@ -23,6 +23,10 @@ const Properties = () => {
     return <LoadingSpinner />;
   };
 
+  const selectedProperty = properties.data.find(
+    (property) => property.id === selectedPropertyId
+  );
+
   const $loadableContent = () => {
     if (properties.loading) return $loadingState();
     return (
@@ -32,7 +36,10 @@ const Properties = () => {
           properties={properties}
           selectedPropertyId={selectedPropertyId}
         />
-        <LeaseDetails selectedPropertyId={selectedPropertyId} />
+        <LeaseDetails
+          selectedPropertyId={selectedPropertyId}
+          selectedProperty={selectedProperty}
+        />
       </>
     );
   };

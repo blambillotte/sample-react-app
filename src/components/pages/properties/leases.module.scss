@@ -1,7 +1,9 @@
 @import "../../../common_styles/variables";
+@import "../../../common_styles/animations";
 
 .leases {
   margin: 12px;
+  animation: fadeIn ease 300ms;
 
   table {
     border-collapse: collapse;

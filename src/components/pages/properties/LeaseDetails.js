@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../../services/api";
 import styles from "./leases.module.scss";
 
-const LeaseDetails = ({ selectedPropertyId }) => {
+const LeaseDetails = ({ selectedPropertyId, selectedProperty }) => {
   const [leases, setLeases] = useState({ data: [], loading: false });
 
   useEffect(() => {
@@ -68,8 +68,14 @@ const LeaseDetails = ({ selectedPropertyId }) => {
     return leases.data.map((lease) => $tableRow(lease));
   };
 
+  const $subTitle = () => {
+    if (!selectedProperty) return null;
+    return <h2>{selectedProperty.name} Leases</h2>;
+  };
+
   return (
     <div className={styles.leases}>
+      {$subTitle()}
       <table>
         <thead>
           <tr>

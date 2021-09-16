@@ -2,7 +2,7 @@ import classnames from "classnames";
 import styles from "./properties.module.scss";
 import { getPricePerSquareFoot } from "./square_foot_utils";
 
-const PropertyCard = ({ property, setSelectedPropertyId }) => {
+const PropertyCard = ({ property, setSelectedPropertyId, isSelected }) => {
   const { name, address1, address2, baseRent, sqft, id } = property;
 
   const $address = () => (
@@ -25,7 +25,10 @@ const PropertyCard = ({ property, setSelectedPropertyId }) => {
   );
 
   return (
-    <div className={styles.card} onClick={() => setSelectedPropertyId(id)}>
+    <div
+      className={classnames(styles.card, { [styles.selected]: isSelected })}
+      onClick={() => setSelectedPropertyId(id)}
+    >
       <div className={styles.header}>
         <h2>{name}</h2>
       </div>

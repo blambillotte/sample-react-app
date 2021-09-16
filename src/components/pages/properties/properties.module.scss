@@ -1,6 +1,4 @@
-$card_border: #eeeeee;
-$body_text: #222222;
-$hover_blue: #eff6ff;
+@import "../../../common_styles/variables";
 
 .container {
   max-width: 1200px;
@@ -14,12 +12,18 @@ $hover_blue: #eff6ff;
 .card {
   flex: 0 0 350px;
   margin: 12px;
-  border: 1px solid $card_border;
+  border: 1px solid $border_color;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   &:hover {
     background: $hover_blue;
     cursor: pointer;
+  }
+
+  &.selected {
+    border: 2px solid #5068c9;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
 
   .header {
@@ -29,7 +33,7 @@ $hover_blue: #eff6ff;
 
   .details {
     padding: 12px;
-    border-top: 1px solid $card_border;
+    border-top: 1px solid $border_color;
   }
 
   .detail-row {

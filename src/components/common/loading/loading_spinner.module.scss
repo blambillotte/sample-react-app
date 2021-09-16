@@ -1,0 +1,33 @@
+@import "../../../common_styles/variables";
+
+.loading-spinner {
+  $size: 80px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: $size;
+  height: $size;
+
+  &:after {
+    content: " ";
+    display: block;
+    width: $size - 20;
+    height: $size - 20;
+    border-radius: 50%;
+    border: 6px solid $light_grey;
+    border-color: $light_grey transparent $light_grey transparent;
+    animation: loading-spinner 1s linear infinite;
+  }
+}
+
+@keyframes loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

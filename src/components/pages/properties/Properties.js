@@ -1,17 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../../../services/api";
 import PropertiesList from "./PropertiesList";
 import LeaseDetails from "./LeaseDetails";
+import LoadingSpinner from "../../common/loading/LoadingSpinner";
 import styles from "./properties.module.scss";
 
 const Properties = () => {
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [properties, setProperties] = useState({ data: [], loading: true });
 
-  return (
-    <div className={styles.container}>
-      <PropertiesList setSelectedPropertyId={setSelectedPropertyId} />
-      <LeaseDetails selectedPropertyId={selectedPropertyId} />
-    </div>
-  );
+  useEffect(() => {
+    api
+      .post({ method: "POST", path: "fe-challenge/properties" })
+      .then((data) => {
+        setProperties({ loading: false, data });
+        // pre-select the first property for the user
+        if (data.length) setSelectedPropertyId(data[0].id);
+      });
+  }, [setSelectedPropertyId]);
+
+  const $loadingState = () => {
+    return <LoadingSpinner />;
+  };
+
+  const $loadableContent = () => {
+    if (properties.loading) return $loadingState();
+    return (
+      <>
+        <PropertiesList
+          setSelectedPropertyId={setSelectedPropertyId}
+          properties={properties}
+          selectedPropertyId={selectedPropertyId}
+        />
+        <LeaseDetails selectedPropertyId={selectedPropertyId} />
+      </>
+    );
+  };
+
+  return <div className={styles.container}>{$loadableContent()}</div>;
 };
 
 export default Properties;

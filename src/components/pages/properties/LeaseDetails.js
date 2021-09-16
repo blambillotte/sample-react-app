@@ -15,12 +15,9 @@ const LeaseDetails = ({ selectedPropertyId, selectedProperty }) => {
         })
         .then((data) => {
           setLeases({ loading: false, data });
-          console.log(data);
         });
     }
   }, [selectedPropertyId]);
-
-  if (leases.loading || !selectedPropertyId) return null;
 
   const primaryContact = ({ contacts }) => {
     const contactsArr = Object.keys(contacts).map((contactName) => ({
@@ -63,6 +60,7 @@ const LeaseDetails = ({ selectedPropertyId, selectedProperty }) => {
   );
 
   const $tableRows = () => {
+    if (leases.loading || !selectedPropertyId) return null;
     if (!leases.data.length) return $nullStateRow();
 
     return leases.data.map((lease) => $tableRow(lease));
